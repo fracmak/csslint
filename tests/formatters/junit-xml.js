@@ -9,7 +9,7 @@
         "File with no problems should say so": function(){
 
             var result = { messages: [], stats: [] },
-                expected = "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites></testsuites>";
+                expected = "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites><testsuite time=\"0\" tests=\"0\" skipped=\"0\" errors=\"0\" failures=\"0\" package=\"net.csslint\" name=\"FILE\"></testsuite></testsuites>";
             Assert.areEqual(expected, CSSLint.format(result, "FILE", "junit-xml"));
 
         },
