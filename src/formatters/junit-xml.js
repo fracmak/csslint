@@ -32,6 +32,8 @@ CSSLint.addFormatter({
         "use strict";
 
         var messages = results.messages,
+            statKeys = Object.keys(results.stats),
+            numTests = results.stats["rule-count"] || messages.length,
             output = [],
             tests = {
                 "error": 0,
@@ -96,10 +98,18 @@ CSSLint.addFormatter({
 
             });
 
-            output.unshift("<testsuite time=\"0\" tests=\"" + messages.length + "\" skipped=\"0\" errors=\"" + tests.error + "\" failures=\"" + tests.failure + "\" package=\"net.csslint\" name=\"" + filename + "\">");
-            output.push("</testsuite>");
-
         }
+
+        if (statKeys.length > 0) {
+            output.push("<properties>");
+            statKeys.forEach(function(key) {
+                output.push("<property name=\"" + key + "\" value=\"" + results.stats[key] + "\"/>");
+            });
+            output.push("</properties>");
+        }
+
+        output.unshift("<testsuite time=\"0\" tests=\"" + numTests + "\" skipped=\"0\" errors=\"" + tests.error + "\" failures=\"" + tests.failure + "\" package=\"net.csslint\" name=\"" + filename + "\">");
+        output.push("</testsuite>");
 
         return output.join("");
 

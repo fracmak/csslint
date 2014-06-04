@@ -20,9 +20,9 @@ function Reporter(lines, ruleset){
     /**
      * List of statistics being reported.
      * @property stats
-     * @type String[]
+     * @type Object
      */
-    this.stats = [];
+    this.stats = {};
 
     /**
      * Lines of code being reported on. Used to provide contextual information
